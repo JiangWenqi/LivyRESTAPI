@@ -24,6 +24,10 @@ https://cloud.tencent.com/developer/article/1078857
 
 大体思路是用 `Java` 模拟发送请求报文给 `Livy`，
 
+## Livy集群配置
+
+参见这篇[文档](docs/集群配置Livy.md)
+
 ---
 
 
