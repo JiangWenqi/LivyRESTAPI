@@ -3,6 +3,7 @@ package space.jwqwy.livy.service;
 import space.jwqwy.livy.entiy.SparkJob;
 import space.jwqwy.livy.eum.SparkJobState;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,6 +17,7 @@ public interface LivyService {
 
     /**
      * 运行一个 SparkJob 一直等到他运行完成之后才会有返回值
+     * 期间伴随着日志的输出
      *
      * @param job SparkJob
      * @return 任务是否正确运行结束
@@ -67,7 +69,18 @@ public interface LivyService {
      * @param sparkJobID SparkJob 的 ID（batch session ID）
      * @return Spark Job 日志 ，具体的 batch session 日志
      */
-    Map<String, Object> getSparkJoblog(int sparkJobID);
+    String getSparkJobLog(int sparkJobID);
+
+    /**
+     * 返回新增加的日志
+     * 在前端实时展示日志的时候有用
+     * 每隔几秒请求一下这个接口请求这个
+     *
+     * @param sparkJobID SparkJob 的 ID（batch session ID）
+     * @param oldLog     之前返回的日志
+     * @return 新生成的日志
+     */
+    Map<String, List<String>> getSparkJobNewLog(int sparkJobID, Map<String, List<String>> oldLog);
 
     /**
      * Kills the Batch job.
